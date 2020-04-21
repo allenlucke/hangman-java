@@ -3,9 +3,11 @@ package com.project.Hangman;
 import com.project.Hangman.Hangman;
 
 public class Game {
+    public static final int MAX_MISSES = 7;
     private String answer;
     private String hits;
     private String misses;
+
 
     public Game(String answer) {
         this.answer = answer;
@@ -22,6 +24,11 @@ public class Game {
         }
         return isHit;
     }
+
+    public int getRemainingTries() {
+        return MAX_MISSES - misses.length();
+    }
+
     public String getCurrentProgress() {
         String progress = "";
         // Loops through each letter in the answer
