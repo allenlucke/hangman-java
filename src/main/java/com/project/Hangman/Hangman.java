@@ -6,13 +6,15 @@ public class Hangman {
 
         Game game = new Game("beginning");
         Prompter prompter = new Prompter(game);
-        prompter.displayProgress();
-        boolean isHit = prompter.promptForGuess();
-        if (isHit) {
-            System.out.println("We have a hit!");
-        }else {
-            System.out.println("Missed!");
+        while(game.getRemainingTries() > 0) {
+            prompter.displayProgress();
+            prompter.promptForGuess();
         }
-        prompter.displayProgress();
+//        boolean isHit = prompter.promptForGuess();
+//        if (isHit) {
+//            System.out.println("We have a hit!");
+//        }else {
+//            System.out.println("Missed!");
+//        }
     }
 }

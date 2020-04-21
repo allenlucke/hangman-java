@@ -8,27 +8,34 @@ public class Game {
     private String hits;
     private String misses;
 
-
+    // Game constructor
     public Game(String answer) {
         this.answer = answer;
         hits = "";
         misses = "";
     }
 
+    //Applies the guess
     public boolean applyGuess(char letter) {
-        boolean isHit = answer.indexOf(letter) != -1;
-        if(isHit) {
-            hits += letter;
-        }else {
-            misses += letter;
+        //Throws exception if the letter has already been guessed
+        if (misses.indexOf(letter) != -1 || hits.indexOf(letter) != -1) {
+            throw new IllegalArgumentException(letter + " has already been guessed");
         }
-        return isHit;
+            boolean isHit = answer.indexOf(letter) != -1;
+            if (isHit) {
+                hits += letter;
+            } else {
+                misses += letter;
+            }
+            return isHit;
     }
 
+    //Checks for number of remaining attempts
     public int getRemainingTries() {
         return MAX_MISSES - misses.length();
     }
 
+    //Displays current progress
     public String getCurrentProgress() {
         String progress = "";
         // Loops through each letter in the answer
