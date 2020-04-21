@@ -16,7 +16,7 @@ public class Game {
     }
 
     private char normalizeGuess(char letter) {
-        //Trows exception if letter is not a letter
+        //Throws exception if letter is not a letter
         if(! Character.isLetter(letter)) {
             throw new IllegalArgumentException("An actual letter is required");
         }
@@ -26,6 +26,13 @@ public class Game {
             throw new IllegalArgumentException(letter + " has already been guessed");
         }
         return letter;
+    }
+
+    public boolean applyGuess(String letters) {
+        if (letters.length() == 0) {
+            throw new IllegalArgumentException("No letter found.");
+        }
+        return applyGuess(letters.charAt(0));
     }
 
     //Applies the guess
