@@ -10,24 +10,34 @@ public class Game {
 
     // Game constructor
     public Game(String answer) {
-        this.answer = answer;
+        this.answer = answer.toLowerCase();
         hits = "";
         misses = "";
     }
 
-    //Applies the guess
-    public boolean applyGuess(char letter) {
+    private char normalizeGuess(char letter) {
+        //Trows exception if letter is not a letter
+        if(! Character.isLetter(letter)) {
+            throw new IllegalArgumentException("An actual letter is required");
+        }
+        letter = Character.toLowerCase(letter);
         //Throws exception if the letter has already been guessed
         if (misses.indexOf(letter) != -1 || hits.indexOf(letter) != -1) {
             throw new IllegalArgumentException(letter + " has already been guessed");
         }
-            boolean isHit = answer.indexOf(letter) != -1;
-            if (isHit) {
-                hits += letter;
-            } else {
-                misses += letter;
-            }
-            return isHit;
+        return letter;
+    }
+
+    //Applies the guess
+    public boolean applyGuess(char letter) {
+        letter = normalizeGuess(letter);
+        boolean isHit = answer.indexOf(letter) != -1;
+        if (isHit) {
+            hits += letter;
+        } else {
+            misses += letter;
+        }
+        return isHit;
     }
 
     //Checks for number of remaining attempts
